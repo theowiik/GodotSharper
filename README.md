@@ -1,4 +1,6 @@
-![logo](meta/amazing_logo.png)
+<div align="center">
+    <img width="350" src="meta/amazing_logo.png">
+</div>
 
 # GoSharper
 Useful classes, methods and style guide (?) for Godot C# that I felt were missing.
