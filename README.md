@@ -1,5 +1,17 @@
-# GoSharper - Utilities for Godot C#
+![logo](meta/amazing_logo.png)
+
+# GoSharper
 Useful classes, methods and style guide (?) for Godot C# that I felt were missing.
+
+- [GoSharper](#gosharper)
+  * [Features](#features)
+  * [Usage](#usage)
+    + [Classes](#classes)
+      - [NodeService](#nodeservice)
+      - [ShapeService](#shapeservice)
+  * [Style Guide & Structure](#style-guide---structure)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Features
 * Typed node features
@@ -27,3 +39,6 @@ Returns a array of 6 points representing a hexagon with the center being ```(0, 
 ```csharp
 Vector2[] CreateHexagon(float sideLength)
 ```
+
+## Style Guide & Structure
+todo
