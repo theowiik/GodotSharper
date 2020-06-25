@@ -19,6 +19,8 @@ Useful classes, methods and style guide (?) for Godot C# that I felt were missin
 * Typed node features
 * Typed scene handler
 * Shape creator for shapes like a hexagon ...
+* ObjectPools
+ICreatable (factory method)
 
 ## Usage
 Never mind, just use [AlleyCat](https://github.com/mysticfall/AlleyCat) :slightly_smiling_face:
