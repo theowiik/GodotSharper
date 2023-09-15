@@ -32,7 +32,7 @@ Utility library for Godot C# projects.
 
 ### Autowiring
 
-TODO 🚧 👷
+TODO 🚧 👷 👷
 
 ## Old version
 
