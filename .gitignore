@@ -1,3 +1,7 @@
+# Custom
+
+*.sln
+
 # Created by https://www.toptal.com/developers/gitignore/api/dotnetcore,visualstudio,visualstudiocode,rider,jetbrains+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotnetcore,visualstudio,visualstudiocode,rider,jetbrains+all
 
