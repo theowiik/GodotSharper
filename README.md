@@ -2,6 +2,10 @@
 
 Utility library for Godot C# projects.
 
+<div align="center">
+    <img width="350" src="Meta/logo.png">
+</div>
+
 - [GodotSharper](#godotsharper)
   - [Installation](#installation)
   - [Features](#features)
