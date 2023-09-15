@@ -7,10 +7,16 @@ Utility library for Godot C# projects.
 </div>
 
 - [GodotSharper](#godotsharper)
+  - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Features](#features)
     - [Autowiring](#autowiring)
   - [Old version](#old-version)
+
+## Prerequisites
+
+- Godot 4.1.1
+- .NET 7.0
 
 ## Installation
 
