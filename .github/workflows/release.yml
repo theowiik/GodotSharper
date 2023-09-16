@@ -4,7 +4,7 @@ name: Build and Release
 on:
   push:
     branches:
-      - build9
+      - main
 
 jobs:
   build:
@@ -13,11 +13,11 @@ jobs:
 
     steps:
     # Checks out the repository under $GITHUB_WORKSPACE, so the workflow can access it.
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
 
     # Uses the provided action to get the current date and time in the desired format.
-    - name: Get current time
+    - name: Get Current Time
       uses: josStorer/get-current-time@v2
       id: current-time
       with:
@@ -31,7 +31,7 @@ jobs:
         dotnet-version: '7.0.x'
 
     # Restores the dependencies of the .NET project.
-    - name: Restore dependencies
+    - name: Restore Dependencies
       run: dotnet restore
 
     # Builds the .NET project in Release configuration without restoring dependencies.
@@ -43,7 +43,7 @@ jobs:
       run: dotnet publish --configuration Release --no-build -o ./out
 
     # Creates a new release on GitHub using the current date and time and uploads the built DLL.
-    - name: Release and upload DLL
+    - name: Release and Upload DLL
       uses: softprops/action-gh-release@v1
       with:
         tag_name: release/${{ steps.current-time.outputs.formattedTime }}
