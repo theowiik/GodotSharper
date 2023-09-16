@@ -5,7 +5,7 @@ using GodotSharper.Exceptions;
 namespace GodotSharper.AutoGetNode;
 
 /// <summary>
-/// Attribute used to automatically get a node from the scene tree.
+///     Attribute used to automatically get a node from the scene tree.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public sealed class GetNodeAttribute : Attribute
@@ -18,7 +18,7 @@ public sealed class GetNodeAttribute : Attribute
     }
 
     /// <summary>
-    /// Sets the node specified by the attribute on the given member of the provided node.
+    ///     Sets the node specified by the attribute on the given member of the provided node.
     /// </summary>
     /// <param name="memberInfo">The member to set the node on.</param>
     /// <param name="node">The node to get the child node from.</param>

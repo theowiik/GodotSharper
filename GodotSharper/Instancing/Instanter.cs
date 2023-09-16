@@ -3,7 +3,7 @@
 namespace GodotSharper.Instancing;
 
 /// <summary>
-/// A static class that provides a method for instantiating Godot nodes.
+///     A static class that provides a method for instantiating Godot nodes.
 /// </summary>
 public static class Instanter
 {
@@ -11,7 +11,7 @@ public static class Instanter
         new Dictionary<Type, string>();
 
     /// <summary>
-    /// Instantiates a Godot node of the specified type.
+    ///     Instantiates a Godot node of the specified type.
     /// </summary>
     /// <typeparam name="T">The type of the node to instantiate.</typeparam>
     /// <returns>The instantiated node.</returns>
@@ -32,11 +32,9 @@ public static class Instanter
                 Attribute.GetCustomAttribute(type, typeof(InstantiableAttribute));
 
             if (attr == null)
-            {
                 throw new FileNotFoundException(
                     "Could not find a PackedSceneAttribute for " + type
                 );
-            }
 
             path = attr.Path;
             s_typePathLookup[type] = path;
