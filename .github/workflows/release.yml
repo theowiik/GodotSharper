@@ -1,6 +1,6 @@
 # This GitHub Action is designed to build, publish, and release a .NET 7 project.
 # The action is triggered when a commit is pushed to the `main` branch.
-# The release is named using the timestamp of the commit in the format `Release_YYYYMMDDHHmm`.
+# The release is named using the current date and time in the format `Release_YYYYMMDDHHmm`.
 
 name: Build and Release
 
@@ -11,7 +11,7 @@ on:
       - main
 
 jobs:
-  build_and_release:
+  build:
     # Specifies the type of runner that the job will run on.
     runs-on: ubuntu-latest
 
@@ -20,13 +20,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Extracts and formats the timestamp from the commit that triggered the workflow.
-    - name: Extract timestamp
-      id: timestamp
-      run: |
-        TIMESTAMP=$(echo "${{ github.event.commits[0].timestamp }}" | date -u -Iseconds -f- +'%Y%m%d%H%M')
-        echo "::set-output name=formatted::$TIMESTAMP"
-      shell: bash
+    # Uses a third-party action to get the current date and time in the desired format.
+    - name: Get current date and time
+      id: currentdate
+      uses: gerred/date-action@v1
+      with:
+        format: 'YYYYMMDDHHmm'
 
     # Sets up a .NET 7 environment for the subsequent steps.
     - name: Setup .NET 7
@@ -46,15 +45,15 @@ jobs:
     - name: Publish
       run: dotnet publish --configuration Release --no-build -o ./out
 
-    # Creates a new release on GitHub using the formatted timestamp.
+    # Creates a new release on GitHub using the current date and time.
     # The release contains the built DLL from the .NET project.
     - name: Create Release and Upload DLL
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: Release_${{ steps.timestamp.outputs.formatted }}
-        release_name: Release_${{ steps.timestamp.outputs.formatted }}
+        tag_name: Release_${{ steps.currentdate.outputs.date }}
+        release_name: Release_${{ steps.currentdate.outputs.date }}
         draft: false
         prerelease: false
 
