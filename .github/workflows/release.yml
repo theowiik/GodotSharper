@@ -1,7 +1,3 @@
-# This GitHub Action is designed to build, publish, and release a .NET 7 project.
-# The action is triggered when a commit is pushed to the `main` branch.
-# The release is named using the current date and time in the format `Release_YYYYMMDDHH`.
-
 name: Build and Release
 
 # Specifies the event that triggers the workflow.
@@ -17,11 +13,11 @@ jobs:
 
     steps:
     # Checks out the repository under $GITHUB_WORKSPACE, so the workflow can access it.
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
 
     # Uses the provided action to get the current date and time in the desired format.
-    - name: Get current time
+    - name: Get Current Time
       uses: josStorer/get-current-time@v2
       id: current-time
       with:
@@ -35,7 +31,7 @@ jobs:
         dotnet-version: '7.0.x'
 
     # Restores the dependencies of the .NET project.
-    - name: Restore dependencies
+    - name: Restore Dependencies
       run: dotnet restore
 
     # Builds the .NET project in Release configuration without restoring dependencies.
@@ -46,24 +42,12 @@ jobs:
     - name: Publish
       run: dotnet publish --configuration Release --no-build -o ./out
 
-    # Creates a new release on GitHub using the current date and time.
-    - name: Create release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # Creates a new release on GitHub using the current date and time and uploads the built DLL.
+    - name: Release and Upload DLL
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: release/${{ steps.current-time.outputs.formattedTime }}
-        release_name: release_${{ steps.current-time.outputs.formattedTime }}
-        draft: false
-        prerelease: false
-
-    # Uploads the built DLL to the created release.
-    - name: Upload DLL to release
-      uses: actions/upload-release-asset@v1
+        name: release_${{ steps.current-time.outputs.formattedTime }}
+        files: ./out/GodotSharper.dll
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create-release.outputs.upload_url }}
-        asset_path: ./out/GodotSharper.dll
-        asset_name: GodotSharper.dll
-        asset_content_type: application/octet-stream
