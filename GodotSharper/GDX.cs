@@ -1,8 +1,20 @@
 using Godot;
 
-namespace GoSharper;
+namespace GodotSharper;
 
 public static class GDX
 {
-    public static void Printt(string message) => GD.Print(message);
+    public static T LoadOrFail<T>(string path) where T : class
+    {
+        var node = GD.Load<T>(path);
+
+        if (node != null)
+        {
+            return node;
+        }
+
+        var msg = $"Could not load resource at {path}";
+        GD.PrintErr(msg);
+        throw new FileNotFoundException(msg);
+    }
 }
