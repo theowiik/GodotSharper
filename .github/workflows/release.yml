@@ -1,6 +1,6 @@
 # This GitHub Action is designed to build, publish, and release a .NET 7 project.
 # The action is triggered when a commit is pushed to the `main` branch.
-# The release is named using the current date and time in the format `Release_YYYYMMDDHHmm`.
+# The release is named using the current date and time in the format `Release_YYYYMMDDHH`.
 
 name: Build and Release
 
@@ -20,12 +20,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Uses a third-party action to get the current date and time in the desired format.
-    - name: Get current date and time
-      id: currentdate
-      uses: gerred/date-action@v1
+    # Uses the provided action to get the current date and time in the desired format.
+    - name: Get current time
+      uses: josStorer/get-current-time@v2
+      id: current-time
       with:
-        format: 'YYYYMMDDHHmm'
+        format: YYYYMMDD-HH
+        utcOffset: "+08:00"
 
     # Sets up a .NET 7 environment for the subsequent steps.
     - name: Setup .NET 7
@@ -52,8 +53,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: Release_${{ steps.currentdate.outputs.date }}
-        release_name: Release_${{ steps.currentdate.outputs.date }}
+        tag_name: Release_${{ steps.current-time.outputs.time }}
+        release_name: Release_${{ steps.current-time.outputs.time }}
         draft: false
         prerelease: false
 
@@ -63,7 +64,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        upload_url: ${{ steps.create-release.outputs.upload_url }}
         asset_path: ./out/GodotSharper.dll
         asset_name: GodotSharper.dll
         asset_content_type: application/octet-stream
