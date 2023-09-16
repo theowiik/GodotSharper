@@ -25,7 +25,7 @@ jobs:
       uses: josStorer/get-current-time@v2
       id: current-time
       with:
-        format: YYYYMMDDHHMM
+        format: YYYYMMDDHHmm
         utcOffset: "+08:00"
 
     # Sets up a .NET 7 environment for the subsequent steps.
