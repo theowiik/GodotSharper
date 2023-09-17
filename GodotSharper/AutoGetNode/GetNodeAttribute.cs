@@ -12,7 +12,7 @@ public sealed class GetNodeAttribute : Attribute
 {
     private readonly string _path;
 
-    private GetNodeAttribute(string nodePath)
+    public GetNodeAttribute(string nodePath)
     {
         _path = nodePath;
     }
