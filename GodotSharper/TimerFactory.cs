@@ -8,13 +8,26 @@ namespace GodotSharper;
 public static class TimerFactory
 {
     /// <summary>
-    ///     Creates a new Timer object that starts automatically and triggers only once after the specified wait time. Note:
-    ///     also destroys the timer after it triggers!
+    ///     Creates a new Timer object that starts automatically and triggers only once after the specified wait time.
     /// </summary>
     /// <param name="waitTime">The time to wait before triggering the timer, in seconds.</param>
     /// <param name="onTimeout">An optional action to execute when the timer triggers.</param>
     /// <returns>The newly created Timer object.</returns>
     public static Timer StartedOneShot(double waitTime, Action onTimeout = null)
+    {
+        var timer = InternalCreateTimer(true, true, waitTime);
+        timer.Timeout += () => onTimeout?.Invoke();
+
+        return timer;
+    }
+    
+    /// <summary>
+    ///     Creates a new Timer object that starts automatically, triggers only once after the specified wait time, and destroys itself after triggering.
+    /// </summary>
+    /// <param name="waitTime">The time to wait before triggering the timer, in seconds.</param>
+    /// <param name="onTimeout">An optional action to execute when the timer triggers.</param>
+    /// <returns>The newly created Timer object.</returns>
+    public static Timer StartedSelfDestructingOneShot(double waitTime, Action onTimeout = null)
     {
         var timer = InternalCreateTimer(true, true, waitTime);
         timer.Timeout += () =>
