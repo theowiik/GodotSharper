@@ -16,7 +16,9 @@ public static class EnumerableExtensions
             throw new ArgumentException("Count must be greater than or equal to 0", nameof(count));
 
         for (var i = 0; i < count; i++)
+        {
             action(i);
+        }
     }
 
     /// <summary>
@@ -30,7 +32,9 @@ public static class EnumerableExtensions
             throw new ArgumentException("Count must be greater than or equal to 0", nameof(count));
 
         for (var i = 0; i < count; i++)
+        {
             action();
+        }
     }
 
     /// <summary>
