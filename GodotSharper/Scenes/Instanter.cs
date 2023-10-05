@@ -28,12 +28,11 @@ public static class Instanter
         }
         else
         {
-            var attr = (InstantiableAttribute)
-                Attribute.GetCustomAttribute(type, typeof(InstantiableAttribute));
+            var attr = (SceneAttribute)Attribute.GetCustomAttribute(type, typeof(SceneAttribute));
 
             if (attr == null)
-                throw new FileNotFoundException(
-                    "Could not find a PackedSceneAttribute for " + type
+                throw new ArgumentException(
+                    $"Type {type} does not have a {nameof(SceneAttribute)}"
                 );
 
             path = attr.Path;

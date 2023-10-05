@@ -20,9 +20,10 @@ public static class TimerFactory
 
         return timer;
     }
-    
+
     /// <summary>
-    ///     Creates a new Timer object that starts automatically, triggers only once after the specified wait time, and destroys itself after triggering.
+    ///     Creates a new Timer object that starts automatically, triggers only once after the specified wait time, and
+    ///     destroys itself after triggering.
     /// </summary>
     /// <param name="waitTime">The time to wait before triggering the timer, in seconds.</param>
     /// <param name="onTimeout">An optional action to execute when the timer triggers.</param>
