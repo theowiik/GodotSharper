@@ -72,6 +72,9 @@ public static class AutoGetNode
         where T : MemberInfo
     {
         foreach (var member in members)
+        {
             member.GetCustomAttribute<GetNodeAttribute>()?.SetNode(member, node);
+            member.GetCustomAttribute<GetUniqueNodeAttribute>()?.SetNode(member, node);
+        }
     }
 }
